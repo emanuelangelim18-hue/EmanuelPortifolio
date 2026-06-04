@@ -1,0 +1,162 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+
+  /* Custom Elegant Dark Palette Variables */
+  --color-[#020617]: #020617;
+  --color-brand-primary: #38bdf8; /* Accent Sky */
+  --color-brand-secondary: #0ea5e9; /* Deep Sky */
+}
+
+/* Base style resets and scrollbars */
+html {
+  scroll-behavior: smooth;
+  font-family: var(--font-sans);
+  background-color: #020617;
+}
+
+body {
+  background-color: #020617;
+  color: #f8fafc;
+}
+
+::selection {
+  background-color: rgba(56, 189, 248, 0.2);
+  color: #38bdf8;
+}
+
+/* Glass card styling */
+.glass-card {
+  background: rgba(30, 41, 59, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.glass-card:hover {
+  border-color: rgba(56, 189, 248, 0.3);
+  box-shadow: 0 10px 30px -10px rgba(2, 6, 23, 0.7);
+}
+
+/* Glow effects based on Sky brand */
+.glow-card {
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.glow-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(to bottom right, rgba(255,255,255,0.08), rgba(255,255,255,0.01));
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+}
+
+.glow-card:hover::before {
+  background: linear-gradient(to bottom right, rgba(56, 189, 248, 0.4), rgba(14, 165, 233, 0.15));
+}
+
+/* Pill buttons stylings */
+.btn-pill {
+  border: 1px solid rgba(56, 189, 248, 0.25);
+  border-radius: 9999px;
+  background-color: rgba(30, 41, 59, 0.3);
+  color: #f8fafc;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.btn-pill:hover {
+  background-color: #38bdf8;
+  color: #020617;
+  border-color: #38bdf8;
+  box-shadow: 0 0 16px rgba(56, 189, 248, 0.25);
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #020617;
+}
+::-webkit-scrollbar-thumb {
+  background: #1e293b;
+  border-radius: 99px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #334155;
+}
+
+/* Regras de impressão de PDF super higienizadas e profissionais */
+@media print {
+  /* Ocultar elementos desnecessários para a versão impressa em papel */
+  body, html {
+    background: #ffffff !important;
+    color: #000000 !important;
+    height: auto !important;
+    overflow: visible !important;
+    font-size: 12pt !important;
+  }
+
+  #portfolio-header,
+  #home,
+  #competencias,
+  #projetos,
+  #curriculo > div > div:first-child, /* Cabeçalho de título */
+  #curriculo > div > div > div:first-child, /* Barra lateral de ações */
+  footer,
+  button,
+  a svg,
+  .print\:hidden {
+    display: none !important;
+  }
+
+  #curriculo {
+    background: #ffffff !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  /* Exibir apenas a folha de currículo de forma idêntica ao PDF original */
+  #printable-resume-sheet {
+    display: block !important;
+    position: absolute !important;
+    left: 0 !important;
+    top: 0 !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    height: auto !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    box-shadow: none !important;
+    border: none !important;
+    color: #000000 !important;
+    background-color: #ffffff !important;
+  }
+
+  #printable-resume-sheet * {
+    color: #000000 !important;
+    background-color: transparent !important;
+  }
+
+  /* Destacar levemente cabeçalhos no PDF impresso */
+  #printable-resume-sheet h2 {
+    border-bottom: 1.5px solid #000000 !important;
+    color: #000000 !important;
+    margin-top: 1.5rem !important;
+    padding-bottom: 0.25rem !important;
+  }
+
+  #printable-resume-sheet a {
+    text-decoration: underline !important;
+    color: #000000 !important;
+  }
+}
